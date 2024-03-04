@@ -6,6 +6,14 @@ function App() {
 
   const [books, setBooks] = useState([]);
 
+  const deleteBookById = (id) => {
+    const updatedBooks = books.filter((book) => {
+      return book.id !== id; // Keep all the books that don't have the ID we want to delete (silinen id'yi hariç tut ve diğerlerini döndür)
+    });
+
+    setBooks(updatedBooks);
+  };
+
   const createBook = (title) => {
     const updatedBooks = [ // Add a new book to the list
       ...books, // Copy the existing books
@@ -18,7 +26,7 @@ function App() {
 
   return (
     <div className="app">
-      <BookList books={books} />
+      <BookList books={books} onDelete={deleteBookById} />
       <BookCreate onCreate={createBook} />
     </div>
   );
