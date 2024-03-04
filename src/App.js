@@ -6,18 +6,12 @@ function App() {
   const [books, setBooks] = useState([]);
 
   const createBook = (title) => {
-    // BAD CODE
-    // books.push({ id: 123, title: title }); // modifying a property of the state directly
-    // books[0] = { id: 123, title: title }; // modifying an element of the state directly
-    // books.id = 123; 
-    // console.log(books);
-    // setBooks(books);
-    const updatedBooks = [
-      ...books,
-      { id: 123, title: title }
+    const updatedBooks = [ // Add a new book to the list
+      ...books, // Copy the existing books
+      { id: Math.round(Math.random() * 9999), // Generate a random ID
+        title, // Set the title
+      },
     ];
-
-    
     setBooks(updatedBooks);
   };
 
