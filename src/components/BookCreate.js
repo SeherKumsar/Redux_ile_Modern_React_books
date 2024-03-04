@@ -11,6 +11,7 @@ function BookCreate ({ onCreate }) {
     const handleSubmit = (event) => {
         event.preventDefault(); // When the form is submitted, the page should not reload
         onCreate(title);
+        setTitle(''); // Clear the input field
     };
 
     return <div>
