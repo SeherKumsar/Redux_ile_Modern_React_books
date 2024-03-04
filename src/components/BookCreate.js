@@ -14,13 +14,16 @@ function BookCreate ({ onCreate }) {
         setTitle(''); // Clear the input field
     };
 
-    return <div>
-        <form onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input value={title} onChange={handleChange}/>
-            <button>Create!</button>
-        </form>
-    </div>;
+    return (
+        <div className="book-create">
+            <h3>Add a Book</h3>
+            <form onSubmit={handleSubmit}>
+                <label>Title</label>
+                <input className="input" value={title} onChange={handleChange}/>
+                <button className="button">Create!</button>
+            </form>
+        </div>
+    );
 }
 
 export default BookCreate;
