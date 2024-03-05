@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import axios from "axios";
+import { createContext, useState } from 'react';
+import axios from 'axios';
 
 const BooksContext = createContext();
 
@@ -7,48 +7,44 @@ function Provider({ children }) {
   const [books, setBooks] = useState([]);
 
   const fetchBooks = async () => {
-    const response = await axios.get("http://localhost:3001/books");
+    const response = await axios.get('http://localhost:3001/books');
+
     setBooks(response.data);
   };
 
   const editBookById = async (id, newTitle) => {
-    // await axios.put('http://localhost:3001/books/' + id'
     const response = await axios.put(`http://localhost:3001/books/${id}`, {
       title: newTitle,
     });
 
-    console.log(response.data); // Log the updated book to the console
-
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
-        return { ...book, ...response.data}; // get the whole book object and update the title
+        return { ...book, ...response.data }; // get the whole book object and update the title
       }
-      return book; // Keep the book as it is
+
+      return book; // update the book object
     });
 
     setBooks(updatedBooks);
   };
 
   const deleteBookById = async (id) => {
-  await axios.delete(`http://localhost:3001/books/${id}`); // Delete the book from the server
+    await axios.delete(`http://localhost:3001/books/${id}`);
 
     const updatedBooks = books.filter((book) => {
-      return book.id !== id; // Keep all the books that don't have the ID we want to delete (silinen id'yi hariç tut ve diğerlerini döndür)
+      return book.id !== id; // keep all the books that don't have the id
     });
 
     setBooks(updatedBooks);
   };
 
   const createBook = async (title) => {
-    const response = await axios.post("http://localhost:3001/books", {
+    const response = await axios.post('http://localhost:3001/books', {
       title,
     });
-    
-    const updatedBooks = [ // Add a new book to the list
-      ...books, // Copy the existing books
-      response.data, // Add the new book
-    ];
-    setBooks(updatedBooks);
+
+    const updatedBooks = [...books, response.data]; // add the new book to the list of books
+    setBooks(updatedBooks); // update the state
   };
 
   const valueToShare = {
@@ -59,7 +55,11 @@ function Provider({ children }) {
     fetchBooks,
   };
 
-  return <BooksContext.Provider value={valueToShare}>{children}</BooksContext.Provider>;
+  return (
+    <BooksContext.Provider value={valueToShare}>
+      {children}
+    </BooksContext.Provider>
+  );
 }
 
 export { Provider };
