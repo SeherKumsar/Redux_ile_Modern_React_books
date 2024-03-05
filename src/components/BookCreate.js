@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
 
-function BookCreate ({ onCreate }) {
+function BookCreate () {
 
     const [title, setTitle] = useState('');
+    const { createBook } = useContext(BooksContext);
 
     const handleChange = (event) => {
         setTitle(event.target.value);
@@ -10,7 +12,7 @@ function BookCreate ({ onCreate }) {
 
     const handleSubmit = (event) => {
         event.preventDefault(); // When the form is submitted, the page should not reload
-        onCreate(title);
+        createBook(title); // Call the createBook function from the context
         setTitle(''); // Clear the input field
     };
 
