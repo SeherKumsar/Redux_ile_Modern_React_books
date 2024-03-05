@@ -26,7 +26,7 @@ function App() {
 
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
-        return { ...book, title: newTitle }; // Update the title of the book with the given ID
+        return { ...book, ...response.data}; // get the whole book object and update the title
       }
       return book; // Keep the book as it is
     });
