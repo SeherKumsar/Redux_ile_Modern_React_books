@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => { // Fetch the books when the component mounts
     fetchBooks();
-  }, []);
+  }, [fetchBooks]);
 
   return (
     <div className="app">
